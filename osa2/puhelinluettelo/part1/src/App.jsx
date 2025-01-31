@@ -35,6 +35,8 @@ const App = () => {
             setPersons(persons.map(person =>
               person.id !== existingPerson.id ? person : returnedPerson
             ))
+            setErrorMessage({ text: `Updated ${existingPerson.name}`, type: 'success' })
+            setTimeout(() => setErrorMessage({ text: '', type: '' }), 3000)
             setNewName('')
             setNewNumber('')
           })
@@ -93,6 +95,8 @@ const App = () => {
           .deletePerson(id)
           .then(() => {
             setPersons(persons.filter(person => person.id !== id));
+            setErrorMessage({ text: `Deleted ${name}`, type: 'success' })
+            setTimeout(() => setErrorMessage({ text: '', type: '' }), 3000)
             setNewName("");
             setNewNumber("");
           })
