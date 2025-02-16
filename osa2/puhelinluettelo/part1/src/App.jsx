@@ -52,6 +52,7 @@ const App = () => {
     }
 
     const personObject = { name: newName, number: newNumber }
+
     personsService
       .create(personObject)
       .then(returnedPerson => {
@@ -63,8 +64,15 @@ const App = () => {
       })
       .catch(error => {
         console.log(error.response.data)
+
+        setErrorMessage({
+          text: error.response.data.error,
+          type: 'error'
+        })
+        setTimeout(() => setErrorMessage({ text: '', type: '' }), 5000)
       })
   }
+
 
   const handleNameChange = (event) => {
     console.log(event.target.value)
