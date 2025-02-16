@@ -62,10 +62,7 @@ const App = () => {
         setTimeout(() => setErrorMessage({ text: '', type: '' }), 3000)
       })
       .catch(error => {
-        setErrorMessage({
-          text: `${error.response?.data?.error || 'An error occurred'}`,
-          type: 'error',
-        })
+        console.log(error.response.data)
         setTimeout(() => setErrorMessage({ text: '', type: '' }), 3000)
       })
   }
