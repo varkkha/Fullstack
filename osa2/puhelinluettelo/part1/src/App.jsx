@@ -66,7 +66,7 @@ const App = () => {
         console.log(error.response.data)
 
         setErrorMessage({
-          text: error.response.data.error,
+          text: console.log(error.response.data),
           type: 'error'
         })
         setTimeout(() => setErrorMessage({ text: '', type: '' }), 5000)
