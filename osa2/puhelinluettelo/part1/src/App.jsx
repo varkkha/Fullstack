@@ -63,7 +63,6 @@ const App = () => {
       })
       .catch(error => {
         console.log(error.response.data)
-        setTimeout(() => setErrorMessage({ text: '', type: '' }), 3000)
       })
   }
 
