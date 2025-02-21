@@ -45,6 +45,14 @@ test('there are two blogs', async () => {
     assert.strictEqual(response.body.length, initialBlogs.length)
   })
 
+test('blog id is id', async () => {
+    const response = await api.get('/api/blogs')
+
+    response.body.forEach((blog) => {
+        assert(blog.id && !blog._id)
+    })
+  })
+
 after(async () => {
   await mongoose.connection.close()
 })
