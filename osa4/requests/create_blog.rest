@@ -2,8 +2,8 @@ POST http://localhost:3003/api/blogs
 Content-Type: application/json
 
 {
-  "title": "esimerkkiotsikko",
-  "author": "esimerkkiauthor",
-  "url": "esimerkkiurl",
-  "likes": 3
+  "title": "esimerkkiotsikko1",
+  "author": "esimerkkiauthor1",
+  "url": "esimerkkiurl1",
+  "likes": 1
 }
