@@ -5,31 +5,15 @@ const supertest = require('supertest')
 const app = require('../app')
 const api = supertest(app)
 
+const helper = require('./test_helper')
+
 const Blog = require('../models/blog')
 
-const initialBlogs = [
-    {
-      title: 'otsikko1',
-      author: 'tekijä1',
-      url: 'url1',
-      likes: 1
-    },
-    {
-      title: 'otsikko2',
-      author: 'tekijä2',
-      url: 'url2',
-      likes: 2
-    }
-]
+
 
 beforeEach(async () => {
     await Blog.deleteMany({})
-
-    let blogObject = new Blog(initialBlogs[0])
-    await blogObject.save()
-
-    blogObject = new Blog(initialBlogs[1])
-    await blogObject.save()
+    await Blog.insertMany(helper.initialBlogs)
   })
 
 test('blogs are returned as json', async () => {
@@ -42,7 +26,7 @@ test('blogs are returned as json', async () => {
 test('there are two blogs', async () => {
     const response = await api.get('/api/blogs')
 
-    assert.strictEqual(response.body.length, initialBlogs.length)
+    assert.strictEqual(response.body.length, helper.initialBlogs.length)
   })
 
 test('blog id is id', async () => {
@@ -71,7 +55,7 @@ test('a valid blog can be added ', async () => {
 
     const title = response.body.map(r => r.title)
 
-    assert.strictEqual(response.body.length, initialBlogs.length + 1)
+    assert.strictEqual(response.body.length, helper.initialBlogs.length + 1)
 
     assert(title.includes('otsikko3'))
   })
