@@ -9,8 +9,6 @@ const helper = require('./test_helper')
 
 const Blog = require('../models/blog')
 
-
-
 beforeEach(async () => {
     await Blog.deleteMany({})
     await Blog.insertMany(helper.initialBlogs)
@@ -107,7 +105,6 @@ test('a valid blog can be added ', async () => {
       const titles = blogsAtEnd.map(r => r.title)
       assert(!titles.includes(blogToDelete.title))
     })
-
 
 after(async () => {
   await mongoose.connection.close()
