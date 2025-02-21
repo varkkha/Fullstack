@@ -53,6 +53,29 @@ test('blog id is id', async () => {
     })
   })
 
+test('a valid blog can be added ', async () => {
+    const newBlog = {
+        title: 'otsikko3',
+        author: 'tekijä3',
+        url: 'url3',
+        likes: 3
+    }
+
+    await api
+      .post('/api/blogs')
+      .send(newBlog)
+      .expect(201)
+      .expect('Content-Type', /application\/json/)
+
+    const response = await api.get('/api/blogs')
+
+    const title = response.body.map(r => r.title)
+
+    assert.strictEqual(response.body.length, initialBlogs.length + 1)
+
+    assert(title.includes('otsikko3'))
+  })
+
 after(async () => {
   await mongoose.connection.close()
 })
